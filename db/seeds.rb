@@ -1,7 +1,19 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+require 'csv'
+require 'iconv'
+
+file = File.read("#{Rails.root}/spec/support/candidatos.csv")
+file = Iconv.conv('utf-8', 'iso8859-1', file)
+
+
+CSV.parse(file, headers: false, col_sep: ";").each do |col|
+  Candidate.create!(
+    name: col[0], 
+    party: col[4], 
+    coalition_composition: col[7], 
+    gender: col[9], 
+    schooling_level: col[13]
+  )
+end
+
+
+

@@ -9,5 +9,5 @@ class Candidate < ActiveRecord::Base
   validates_uniqueness_of :name
 
   validates_inclusion_of :gender, in: %w(Masculino Feminino)
-
+    
 end
