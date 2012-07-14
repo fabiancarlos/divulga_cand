@@ -12,11 +12,8 @@ describe Candidate do
     it { should validate_presence_of   :party }
     it { should validate_presence_of   :schooling_level }
   end
-  
-
 
   describe "Gender inclusion" do
-
     context "Verifying the correct inclusion of" do
       let(:candidate) { Candidate.make! }
 
@@ -31,4 +28,33 @@ describe Candidate do
       end
     end
   end
+
+
+  describe ".male" do
+    let(:candidate_1) { Candidate.make! }
+    let(:candidate_2) { Candidate.make!(gender: "Feminino") }
+    
+    subject { Candidate.male }
+
+    it "should return only male candidates" do
+      subject.should be_== [candidate_1]
+    end
+  end
+
+
+  describe ".female" do
+    let(:candidate_1) { Candidate.make! }
+    let(:candidate_2) { Candidate.make!(gender: "Feminino") }
+    
+
+    subject { Candidate.female }
+
+    it "should return only female candidates" do
+      subject.should be_== [candidate_2]
+    end
+  end
+
+
+
 end
+
