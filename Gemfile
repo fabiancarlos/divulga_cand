@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.6'
+gem 'rails', '~> 3.2.6'
 gem 'sqlite3'
 gem 'thin'
 gem 'slim'
@@ -12,7 +12,7 @@ end
 
 group :test do
 	gem 'machinist', '>= 2.0.0.beta2'
-	gem 'cucumber', require: false
+	gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'shoulda-matchers'
 end
@@ -22,6 +22,7 @@ group :production do
 end
 
 group :assets do
+  gem 'compass-rails'
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'

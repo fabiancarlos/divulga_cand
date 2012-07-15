@@ -1,3 +1,5 @@
+# coding: utf-8
+
 class Candidate < ActiveRecord::Base
   attr_accessible :coalition_composition, :gender, :name, :party, :schooling_level
 
@@ -12,4 +14,8 @@ class Candidate < ActiveRecord::Base
 
   scope :male,    where(["gender = ?", "Masculino"])
   scope :female,  where(["gender = ?", "Feminino"])
+
+  scope :basic_school_level,    where(["schooling_level IN (?, ?)", "Ensino Fundamental completo", "Ensino Fundamental incompleto"])
+  scope :middle_school_level,   where(["schooling_level IN (?, ?)", "Ensino Médio completo", "Ensino Médio incompleto"])
+  scope :superior_school_level, where(["schooling_level IN (?, ?)", "Superior completo", "Superior incompleto"])
 end

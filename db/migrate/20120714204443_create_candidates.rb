@@ -9,6 +9,7 @@ class CreateCandidates < ActiveRecord::Migration
 
       t.timestamps
     end
+
     add_index :candidates, :name
     add_index :candidates, :schooling_level
   end
