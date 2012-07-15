@@ -12,10 +12,12 @@ class Candidate < ActiveRecord::Base
 
   validates_inclusion_of :gender, in: %w(Masculino Feminino)
 
-  scope :male,    where(["gender = ?", "Masculino"])
-  scope :female,  where(["gender = ?", "Feminino"])
+  scope :male,    where(gender: "Masculino")
+  scope :female,  where(gender: "Feminino")
 
-  scope :basic_school_level,    where(["schooling_level IN (?, ?)", "Ensino Fundamental completo", "Ensino Fundamental incompleto"])
-  scope :middle_school_level,   where(["schooling_level IN (?, ?)", "Ensino Médio completo", "Ensino Médio incompleto"])
-  scope :superior_school_level, where(["schooling_level IN (?, ?)", "Superior completo", "Superior incompleto"])
+  scope :school_level,          ->(*levels){ where(schooling_level: levels) } 
+  scope :basic_school_level,    school_level("Ensino Fundamental completo", "Ensino Fundamental incompleto")
+  scope :middle_school_level,   school_level("Ensino Médio completo", "Ensino Médio incompleto")
+  scope :superior_school_level, school_level("Superior completo", "Superior incompleto")
+
 end
